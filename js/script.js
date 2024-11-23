@@ -56,6 +56,21 @@ function guardarLocalstore(id, chiste) {
     localStorage.setItem(id,JSON.stringify(chiste));
 }
 
-function cargarListaLocalStore(id, chiste) {
-    localStorage.getItem(id, JSON.stringify(chiste));
+function cargarListaLocalStore() {
+    const keys = Object.entries(localStorage)
+    
+    for (let key of keys) {
+        const clave=key[0];
+        const valor=JSON.parse(key[1]);
+    
+        if (valor.icon_url==='https://api.chucknorris.io/img/avatar/chuck-norris.png'){
+            renderizarChiste(valor);
+        }
+     
+    }
 }
+
+cargarListaLocalStore();
+
+//localStorage.clear();
+
