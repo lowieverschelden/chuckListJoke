@@ -51,3 +51,11 @@ function renderizarChiste(chiste){
     ulElement.appendChild(liElemnent)
     guardarLocalstore(id,copiaChiste)
 }
+
+function guardarLocalstore(id, chiste) {
+    localStorage.setItem(id,JSON.stringify(chiste));
+}
+
+function cargarListaLocalStore(id, chiste) {
+    localStorage.getItem(id, JSON.stringify(chiste));
+}
