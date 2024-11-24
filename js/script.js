@@ -1,6 +1,7 @@
 const btnfetchJoke = document.getElementById('fetchJoke');
 const ulElement = document.getElementById('jokeList');
-const btnEliminar = document.getElementById('eliminarTodo');
+//const btnEliminar = document.getElementById('eliminarTodo');
+const elementBody =document.body; // Nos traemos el body para agregar el botón eliminar todo
 
 function obtenerChiste() {
     fetch('https://api.chucknorris.io/jokes/random').then((response) => {
@@ -67,14 +68,23 @@ function cargarListaLocalStore() {
     }
 }
 
-cargarListaLocalStore();
+//crear un botón para eliminar todos los elementos a la vez 
+function pintarBotonLimpiarLocalstore(){
+  //Creamos en el Dom un botón para eliminar todo el localstorage
+  const btnEliminarTodo=document.createElement('button');
+  btnEliminarTodo.classList.add('EliminarTodo');
+  btnEliminarTodo.textContent = 'Eliminar todo';
 
-btnEliminar.addEventListener('click', function() {
-    for (let i = 0; i < localStorage.length; i++) {
+ //Agregamos uel manejador al botón
+  btnEliminarTodo.addEventListener('click', function() {
+    
+    for (let i = localStorage.length -1; i >= 0; i--) {
         const key = localStorage.key(i);
+        console.log('clave: ',key)
         const value = JSON.parse(localStorage.getItem(key)); 
         if (value && value.icon_url) {
             localStorage.removeItem(key);
+            console.log('vale : ',i)
             const liRemove = document.getElementById(key);
             if (liRemove) {
                 liRemove.remove();
@@ -82,3 +92,12 @@ btnEliminar.addEventListener('click', function() {
         }
     }
 });
+
+  
+
+  //añadimos el botón btnEliminarTodo en el body
+  elementBody.appendChild(btnEliminarTodo)
+}
+
+cargarListaLocalStore();
+pintarBotonLimpiarLocalstore(); 
