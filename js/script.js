@@ -1,6 +1,5 @@
 const btnfetchJoke = document.getElementById('fetchJoke');
 const ulElement = document.getElementById('jokeList');
-//const btnEliminar = document.getElementById('eliminarTodo');
 const elementBody =document.body; // Nos traemos el body para agregar el botón eliminar todo
 
 function obtenerChiste() {
